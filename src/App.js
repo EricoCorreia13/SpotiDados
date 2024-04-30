@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import EstacoesDoAno from './Components/EstacoesDoAno';
+import HorasdoDia from './Components/HorasdoDia';
+import UserDifferentSongs from './Components/UserDifferentSongs';
+import UserMediaDiaria from './Components/UserMediaDiaria';
+import UserTotalPlayTime from './Components/UserTotalPlayTime';
+import UserTotalReps from './Components/UserTotalReps';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+  return(
+    <div>
+      <UserTotalReps />
+      <UserDifferentSongs />
+      <UserTotalPlayTime />
+      <UserMediaDiaria />
+      <HorasdoDia />
+      <EstacoesDoAno />
     </div>
   );
 }
