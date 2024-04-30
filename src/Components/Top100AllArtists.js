@@ -4,7 +4,7 @@ import data from "../spotify_data.history.json";
 const Top100AllArtists = () => {
     // Create an object to store the play count for each artist
     const artistPlayCount = {};
-
+    
     // Loop through the data and count the plays for each artist
     data.forEach(item => {
         const artist = item.master_metadata_album_artist_name;
@@ -28,6 +28,7 @@ const Top100AllArtists = () => {
         <div>
             {top100Artists.map(([artist, playCount], index) => (
                 <p key={index}>{artist}: {playCount} plays</p>
+
             ))}
         </div>
     );
