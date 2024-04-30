@@ -7,7 +7,7 @@ const UserTotalReps = () => {
     const numberOfReps = filteredData.length
   return (
     <div>
-      <p>Total de músicas: {numberOfReps}</p>
+      <p>Total de reproduções: {numberOfReps}</p>
     </div>
   )
 }

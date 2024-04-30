@@ -1,4 +1,5 @@
 import './App.css';
+import Top100AllArtists from './Components/Top100AllArtists';
 import EstacoesDoAno from './Components/EstacoesDoAno';
 import HorasdoDia from './Components/HorasdoDia';
 import UserDifferentSongs from './Components/UserDifferentSongs';
@@ -17,6 +18,7 @@ function App() {
       <UserMediaDiaria />
       <HorasdoDia />
       <EstacoesDoAno />
+      <Top100AllArtists />
     </div>
   );
 }
