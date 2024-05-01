@@ -1,34 +1,44 @@
 import React from 'react';
 import data from "../spotify_data.history.json";
-
+import default0 from "../defaultImgs/Default.jpg"
+import default1 from "../defaultImgs/Default1.jpg"
+import default2 from "../defaultImgs/Default2.jpg"
+import default3 from "../defaultImgs/Default3.jpg"
+import default4 from "../defaultImgs/Default4.jpg"
+import default5 from "../defaultImgs/Default5.jpg"
 
 const data1 = data.filter((a) => a.master_metadata_track_name != null);
 
-
+const imgsArray = [default0, default1, default2, default3, default4, default5]
 
 
 const Top100 = () => {
     return (
         <div>
-            <div><h1>Top 100 Artistas</h1>
+            <div>
+                <h1>Top 100 Artistas</h1>
                 {top100Artistas().map(([artist, playCount], index) => (
-                    <div>
-                        
-                        <img src={require(`../imgs/${artist}.jpg`).default || require('../imgs/default.jpg').default} alt={artist} />
-
-
-                    <p key={index}>{index + 1} - {artist}: {playCount} plays</p>
+                    <div key={index} className='flex'>
+                        <img className="rounded-sm size-5" src={imgsArray[Math.floor(Math.random() * imgsArray.length)]}></img>
+                        <p>{index + 1} - {artist}: {playCount} plays</p>
                     </div>
                 ))}
             </div>
             <div><h1>Top 100 Musicas</h1>
                 {top100musicas().map((song, index) => (
-                    <p key={index}>{index + 1} - {song.song} by {song.artist} on {song.album} - {song.listeningTimeInMinutes} mins</p>
+                    <div key={index} className='flex'>
+                        <img className="rounded-sm size-5" src={imgsArray[Math.floor(Math.random() * imgsArray.length)]}></img>
+                        <p key={index}>{index + 1} - {song.song} by {song.artist} on {song.album} - {song.listeningTimeInMinutes} mins</p>
+                    </div>
+
                 ))}
             </div>
             <div><h1>Top 100 Albums</h1>
                 {top100Albums().map((album, index) => (
+                    <div key={index} className='flex'>
+                        <img className="rounded-sm size-5" src={imgsArray[Math.floor(Math.random() * imgsArray.length)]}></img>
                     <p key={index}>{index + 1} - {album.album} by {album.artist} - {album.listeningTimeInMinutes} mins</p>
+                </div>
                 ))}
             </div>
         </div>
@@ -36,6 +46,7 @@ const Top100 = () => {
 }
 
 export default Top100;
+
 
 
 

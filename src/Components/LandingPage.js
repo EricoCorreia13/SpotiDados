@@ -1,17 +1,35 @@
-import React from 'react'
-import data from "../spotify_data.history.json";
+import React, { useState } from 'react'
+import data from "../spotify_data.history.json"
+import defaultUserPic from "../defaultImgs/Default2.jpg"
 const data1 = data.filter((a) => a.master_metadata_track_name != null);
+
+
+
+
 const LandingPage = () => {
-
-
+    const [themeColor, setThemeColor] = useState("#2EBD59")
+    const bgColor = "#181717"
+    const textColor = "#6B726E"
+    const textColor2 = "#6B726E"
     return (
         <div>
-            <p>Estação do ano: {estacaoDoAno()}</p>
-            <p>Horas do dia que mais ouves: {horasDoDia()}</p>
-            <p>Total de músicas: {totalDeMusicas()}</p>
-            <p>Media diária: {mediaDiaria()} minutos</p>
-            <p>Tempo total: {tempoTotal()}</p>
-            <p>Total reproduções: {totalReproducoes()}</p>
+            {/* <h1>User:</h1> */}
+            {/* <p>Estação do ano: {estacaoDoAno()}</p> */}
+            {/* <p>Horas do dia que mais ouves: {horasDoDia()}</p> */}
+            {/* <p>Total de músicas: {totalDeMusicas()}</p> */}
+            {/* <p>Media diária: {mediaDiaria()} minutos</p> */}
+            {/* <p>Tempo total: {tempoTotal()}</p> */}
+            {/* <p>Total reproduções: {totalReproducoes()}</p> */}
+            <div style={{ backgroundColor: bgColor }} className='w-[1200px] h-[700px] rounded-2xl'>
+                <div className='h-[350px]'>
+                    <div>
+                        <img src={defaultUserPic}/>
+                    </div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div style={{ backgroundColor: themeColor }} className='h-[350px] rounded-2xl'></div>
+            </div>
         </div>
     )
 }
@@ -19,25 +37,25 @@ const LandingPage = () => {
 export default LandingPage
 
 function totalReproducoes(){
-    const data1 = data.filter((a) => a.master_metadata_track_name != null);
+
     const filteredData = data1.map(a => a = a.master_metadata_track_name)
     const numberOfReps = filteredData.length
     return numberOfReps
 }
 
 function tempoTotal() {
-    const totalPlaybackTime = data1.reduce((total, item) => total + item.ms_played, 0);
-    const totalHours = Math.floor(totalPlaybackTime / (1000 * 60 * 60));
-    const remainingTime = totalPlaybackTime % (1000 * 60 * 60);
-    const totalMinutes = Math.floor(remainingTime / (1000 * 60));
-    const totalSeconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-    const frase = `${totalHours} hours, ${totalMinutes} minutes, and ${totalSeconds} seconds`;
+    const totalTempo = data1.reduce((total, item) => total + item.ms_played, 0);
+    const totalHoras = Math.floor(totalTempo / (1000 * 60 * 60));
+    const restante = totalTempo % (1000 * 60 * 60);
+    const totalMinutos = Math.floor(restante / (1000 * 60));
+    const totalSegundos = Math.floor((restante % (1000 * 60)) / 1000);
+    const frase = `${totalHoras} hours, ${totalMinutos} minutes, and ${totalSegundos} seconds`;
     return frase
 }
 
 
 function mediaDiaria() {
-    const data1 = data.filter((a) => a.master_metadata_track_name != null);
+
     const naopuladas = data1.filter(a => a.reason_end === "trackdone")
     const totalPlaybackTime = naopuladas.reduce((total, item) => total + item.ms_played, 0);
     const media = Math.floor(totalPlaybackTime / 1203 / (1000 * 60))
@@ -45,7 +63,7 @@ function mediaDiaria() {
 }
 
 function totalDeMusicas() {
-    const data1 = data.filter((a) => a.master_metadata_track_name != null);
+
     const filteredData = data1.map(a => a = a.master_metadata_track_name)
     const numberOfSongs = [...new Set(filteredData)].length
     return numberOfSongs
