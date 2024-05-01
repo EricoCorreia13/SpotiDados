@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+            font-family: 'CircularSpotifyText-Medium';
+            src: url('./fonts/CircularSpotifyText-Medium.otf') format('opentype');
+        }
+    @font-face {
+            font-family: 'CircularSpotifyText-Light';
+            src: url('./fonts/CircularSpotifyText-Light.otf') format('opentype');
+        }
+    @font-face {
+            font-family: 'CircularSpotifyText-Black';
+            src: url('./fonts/CircularSpotifyText-Black.otf') format('opentype');
+        }
+    
+}
