@@ -2,23 +2,25 @@ import React, { useState } from 'react'
 import data from "../spotify_data.history.json"
 import { LuClock3 } from "react-icons/lu";
 import { TbAntennaBars5 } from "react-icons/tb";
-import defaultUserPic from "../defaultImgs/Default2.jpg"
+import defaultUserPic from "../defaultImgs/Default.jpg"
 import { BsThermometerSun, BsThermometerSnow } from "react-icons/bs";
 import { TiWeatherWindyCloudy } from "react-icons/ti";
 import { PiButterflyDuotone } from "react-icons/pi";
 import { IoSearch } from "react-icons/io5";
 import { ReactComponent as Logo } from '../defaultImgs/spotidados-logoB4F.svg';
+
+import Top100 from './Top100';
+import Artist from './Artist';
+
+
 import default0 from "../defaultImgs/Default.jpg"
 import default1 from "../defaultImgs/Default1.jpg"
 import default2 from "../defaultImgs/Default2.jpg"
 import default3 from "../defaultImgs/Default3.jpg"
 import default4 from "../defaultImgs/Default4.jpg"
 import default5 from "../defaultImgs/Default5.jpg"
-
-const data1 = data.filter((a) => a.master_metadata_track_name != null);
-
 const imgsArray = [default0, default1, default2, default3, default4, default5]
-
+const data1 = data.filter((a) => a.master_metadata_track_name != null);
 
 
 const LandingPage = () => {
@@ -26,10 +28,9 @@ const LandingPage = () => {
     const bgColor = "#181717"
     const textColor = "#575757"
     const textColor2 = "#6B726E"
-    const [estacao, setEstacao] = useState("Verão")
     const [search, setSearch] = useState("")
     const [isInputFocused, setIsInputFocused] = useState(false);
-
+    const [artistName, setArtistName] = useState()
     function handleInputFocus() {
         setIsInputFocused(true);
     }
@@ -37,6 +38,8 @@ const LandingPage = () => {
     function handleInputBlur() {
         setIsInputFocused(false);
     }
+    
+    
 
     function mudarIconEstacao(estacao){
         if (estacao === "Primavera"){
@@ -64,7 +67,7 @@ const LandingPage = () => {
     const searchArtistas = todosArtistas().filter(a => a.toLowerCase().includes(search.toLowerCase()))
     
     return (
-        <div>
+        <div style={{ fontFamily: "CircularSpotifyText-Medium" }} >
             {/* <h1>User:</h1> */}
             {/* <p>Estação do ano: {estacaoDoAno()}</p> */}
             {/* <p>Horas do dia que mais ouves: {horasDoDia()}</p> */}
@@ -72,7 +75,12 @@ const LandingPage = () => {
             {/* <p>Media diária: {mediaDiaria()} minutos</p> */}
             {/* <p>Tempo total: {tempoTotal()}</p> */}
             {/* <p>Total reproduções: {totalReproducoes()}</p> */}
-            <div style={{ backgroundColor: bgColor, fontFamily: "CircularSpotifyText-Medium" }} className='w-[1000px] h-[600px] rounded-2xl'>
+            
+            
+            
+            
+            
+            <div style={{ backgroundColor: bgColor }} className='w-[1000px] h-[600px] rounded-2xl'>
                 
                 
                 {/* User Profile Pic */}
@@ -80,29 +88,35 @@ const LandingPage = () => {
                     <div className='flex flex-col align-center w-[200px] ml-10 mt-10 mr-5'>
                         <img src={defaultUserPic} className='rounded-full size-36 p-4'/>
                     </div>
+                     {artistName && <div className='absolute z-10'><Artist artist={artistName} setArtist={setArtistName} themeColor={themeColor}/></div>}
 
-
-                    
+                    {artistName}    
                     <div className='flex flex-col w-[800px] align-center mt-5 mb-5 gap-4'>
                         {/* Search bar */}
                         <div className='ml-[75px] flex flex-col w-[180px] mb-4'>
-                            <div className='bg-[#363636] rounded-full p-1 flex justify-between pr-[15px] pl-[15px] items-center w-[400px]'>
+                            <div className='relative bg-[#363636] rounded-full p-1 flex justify-between pr-[15px] pl-[15px] items-center w-[400px]'>
                                 
                                
                                 <input style={{ border: "none", outline: "none", backgroundColor: "transparent", fontSize: "14px" }} onFocus={handleInputFocus}
-                                    onBlur={handleInputBlur} type='search' value={search} onChange={(event) => setSearch(event.target.value)} placeholder="procura um artista" />
-                                <div><IoSearch style={{ color: themeColor, fontSize: "17px" }} /></div>
+                                     type='search' value={search} onChange={(event) => setSearch(event.target.value)} placeholder="procura um artista" />
+                                <div>
+                                    <IoSearch style={{ color: themeColor, fontSize: "17px" }} /></div>
                                 </div>
                                      {isInputFocused && (
-                                         <ul className='absolute top-[90px] left-[520px] bg-[#363636] rounded-md p-1 overflow-y-auto max-h-[140px] overflow-hidden mt-1 w-[395px] pl-4 pt-1' style={{ scrollbarWidth: "thin", scrollbarColor: "#202020 #101010" }}>
-                                             {searchArtistas.map(a => (
-                                                 <li key={a} className='flex gap-2'>
+                                         <ul className='absolute top-[90px]   bg-[#363636] rounded-md p-1 overflow-y-auto max-h-[140px] overflow-hidden mt-1 w-[395px] pl-4 pt-1' style={{ scrollbarWidth: "thin", scrollbarColor: "#202020 #101010" }}>
+                                             {searchArtistas.map((a, index) => (
+                                                 <li key={index} className='flex gap-2'>
                                                      <img className="rounded-sm size-5" src={imgsArray[Math.floor(Math.random() * imgsArray.length)]} alt={a} />
-                                                     <p>{a}</p>
+                                                     <div onClick={() => {
+                                                        handleInputBlur()
+                                                        setArtistName(a)
+                                                     }} className='cursor-pointer'><p>{a}</p></div>
+                                                     
                                                  </li>
                                              ))}
                                          </ul>
                                      )}
+
                                 </div>
                         
 
@@ -156,7 +170,9 @@ const LandingPage = () => {
                         <Logo style={{ width: "150px", color: themeColor }} />
                     </div>
                 </div>
-                <div style={{ backgroundColor: themeColor }} className='h-[300px] rounded-2xl'></div>
+                <div style={{ backgroundColor: themeColor }} className='h-[300px] rounded-2xl'>
+                    <Top100 />
+                </div>
             </div>
         </div>
     )
