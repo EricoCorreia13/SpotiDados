@@ -1,6 +1,5 @@
 import React from 'react'
 import { FaExpandAlt } from "react-icons/fa"
-import { IoFilter } from "react-icons/io5"
 import { FaCirclePlay } from "react-icons/fa6";
 import data from "../spotify_data.history.json";
 import defaultUserPic from "../defaultImgs/Default2.jpg"
@@ -75,7 +74,7 @@ const Artist = (props) => {
                                 <div className='mt-3'>
                                 <ul className='rounded-md p-1 overflow-y-auto max-h-[140px] overflow-hidden mt-1   pt-1 border-solid' style={{ scrollbarWidth: "thin", scrollbarColor: "#202020 #101010" }}>
                                              {top20musicas(dataArtist).map((a, index) => (
-                                                 <li key={index} className='flex'>
+                                                 <li key={index} className='flex items-center'>
                                                     <div className='flex items-center gap-2 w-[250px]'>
                                                     <p style={{ color: props.themeColor }} className='w-[10px]'>#{index + 1}</p>
                                                      <img className="rounded-sm size-5 ml-5" src={imgsArray[Math.floor(Math.random() * imgsArray.length)]} alt={a} />

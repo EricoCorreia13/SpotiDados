@@ -25,7 +25,7 @@ const data1 = data.filter((a) => a.master_metadata_track_name != null);
 
 const LandingPage = () => {
     const [themeColor, setThemeColor] = useState("#2EBD59")
-    const bgColor = "#181717"
+    const bgColor = "#111111"
     const textColor = "#575757"
     const textColor2 = "#6B726E"
     const [search, setSearch] = useState("")
@@ -170,8 +170,10 @@ const LandingPage = () => {
                         <Logo style={{ width: "150px", color: themeColor }} />
                     </div>
                 </div>
-                <div style={{ backgroundColor: themeColor }} className='h-[300px] rounded-2xl'>
-                    <Top100 />
+                <div style={{ backgroundColor: themeColor }} className='flex h-[300px] rounded-2xl items-center'>
+                    <div className='w-[600px]'></div>
+                    
+                    <Top100 themeColor={themeColor}/>
                 </div>
             </div>
         </div>
