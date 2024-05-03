@@ -136,7 +136,7 @@ const Top100 = (props) => {
 
             {/* Aqui e o grande */}
             {expandido && top === "musicas" && (
-            <div className='text-white mt-[-300px] bg-zinc-900 opacity-95 w-[1000px] h-[600px] rounded-2xl flex justify-center items-center'>
+            <div className='text-white mt-[-300px] ml-[-600px] bg-zinc-900 opacity-95 w-[1000px] h-[600px] rounded-2xl flex justify-center items-center'>
 
                 <div className='rounded-xl w-4/5 h-[500px] bg-black p-2 text-white '>
                     <div className='flex'>
@@ -241,7 +241,7 @@ const Top100 = (props) => {
 
             {/* Aqui e o grande */}
             {expandido && top === "albums" && (
-            <div className='text-white mt-[-300px] bg-zinc-900 opacity-95 w-[1000px] h-[600px] rounded-2xl flex justify-center items-center'>
+            <div className='text-white mt-[-300px] ml-[-600px] bg-zinc-900 opacity-95 w-[1000px] h-[600px] rounded-2xl flex justify-center items-center'>
 
                 <div className='rounded-xl w-4/5 h-[500px] bg-black p-2 text-white '>
                     <div className='flex'>
@@ -325,12 +325,12 @@ const Top100 = (props) => {
                     </div>
                     <div className='mt-3'>
                         <ul className='rounded-md p-1 overflow-y-auto max-h-[140px] overflow-hidden mt-1   pt-1 border-solid' style={{ scrollbarWidth: "thin", scrollbarColor: "#202020 #101010" }}>
-                                {top100Artistas(timeRange).map(([artist, playCount], index) => (
+                                {top100Artistas(timeRange).map(([artist, playCount], index) => (    
                                 <li key={index} className='flex items-center'>
-                                    <div className='flex items-center gap-2 w-[250px]'>
+                                    <div className='flex items-center gap-2 w-[250px]' onClick={() => props.setArtistName(`${artist}`)}>
                                         <p style={{ color: props.themeColor }} className='w-[10px]'>#{index + 1}</p>
                                         <img className="rounded-sm size-5 ml-6" src={imgsArray[Math.floor(Math.random() * imgsArray.length)]} alt={artist} />
-                                        <p className='text-xs text-center text-white'>{artist}</p>
+                                        <p className='text-xs text-center text-white cursor-pointer'>{artist}</p>
                                     </div>
                                     <div className=''>
                                         <p className='text-xs text-right' style={{ color: props.themeColor }}>{playCount} plays</p>
@@ -346,7 +346,7 @@ const Top100 = (props) => {
 
             {/* Aqui e o grande */}
             {expandido && top === "artistas" && (
-            <div className='text-white mt-[-300px] bg-zinc-900 opacity-95 w-[1000px] h-[600px] rounded-2xl flex justify-center items-center'>
+            <div className='text-white mt-[-300px] ml-[-600px] bg-zinc-900 opacity-95 w-[1000px] h-[600px] rounded-2xl flex justify-center items-center'>
 
                 <div className='rounded-xl w-4/5 h-[500px] bg-black p-2 text-white '>
                     <div className='flex'>
@@ -379,12 +379,12 @@ const Top100 = (props) => {
                         <ul className='rounded-md p-1 overflow-y-auto max-h-[440px] overflow-hidden mt-1   pt-1 border-solid' style={{ scrollbarWidth: "thin", scrollbarColor: "#202020 #101010" }}>
                                 {top100Artistas(timeRange).map(([artist, playCount], index) => (
                                 <li key={index} className='flex items-center'>
-                                    <div className='flex items-center gap-2 w-[650px]'>
+                                    <div className='flex items-center gap-2 w-[650px]' onClick={() => props.setArtistName(`${artist}`)}>
                                         <p style={{ color: props.themeColor }} className='w-[10px] mt-3'>#{index + 1}</p>
                                         <img className="rounded-sm size-5 ml-6 mt-2" src={imgsArray[Math.floor(Math.random() * imgsArray.length)]} alt={artist} />
                                         <div className='flex gap-10 items-center'>
                                             
-                                            <p className='text-s text-left text-white w-[150px] mt-3'>{artist}</p>
+                                            <p className='text-s text-left text-white w-[150px] mt-3 cursor-pointer'>{artist}</p>
                                         </div>
                                     </div>
                                     <div className=''>

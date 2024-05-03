@@ -2,8 +2,18 @@
 module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
-    extend: {},
+    
+    extend: {
+      animation:{
+        'fadeIn': 'animate-fade-down'
+      }
+    }
+    
+    
     
   },
+  variants: {
+      extend: {},
+    },
   plugins: [],
 }

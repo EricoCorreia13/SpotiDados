@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaExpandAlt } from "react-icons/fa"
 import { FaCirclePlay } from "react-icons/fa6";
 import { HiArrowUpCircle } from "react-icons/hi2";
@@ -111,6 +111,12 @@ const Artist = (props) => {
 
 export default Artist
 
+
+
+
+  
+
+
 export const Top1 = (props) => {
 
     const [expandido, setExpandido] = useState(false)
@@ -122,7 +128,7 @@ export const Top1 = (props) => {
     return (
         <div>
             {expandido && (
-            <div className='h-[300px] w-[160px] bg-gradient-to-b flex flex-col gap-4' style={{ background: 'linear-gradient(to bottom, #111111 20%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0))' }}>
+            <div className='h-[300px] w-[160px] bg-gradient-to-b flex flex-col gap-4 ' style={{ background: 'linear-gradient(to bottom, #111111 20%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0))' }}>
                 <div>
                 <div className='relative flex justify-center'>
                     <img src={props.img} className=' rounded-full size-32 p-4 mt-2'/>

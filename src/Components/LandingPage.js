@@ -23,7 +23,7 @@ import default4 from "../defaultImgs/Default4.jpg"
 import default5 from "../defaultImgs/Default5.jpg"
 const imgsArray = [default0, default1, default2, default3, default4, default5]
 const data1 = data.filter((a) => a.master_metadata_track_name != null);
-
+const themeColors = ["#2EBD59", "#649AED", "#EB5640", "#F4E357", "#F7CFD4", "#A7C2D1", "#A76CF5", "#D5F479"]
 
 const LandingPage = () => {
     const [themeColor, setThemeColor] = useState("#2EBD59")
@@ -33,10 +33,13 @@ const LandingPage = () => {
     const [search, setSearch] = useState("")
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [artistName, setArtistName] = useState()
-
     
+    function handleThemeColor(color){
+        setThemeColor(color)
+    }
+
     function handleInputFocus() {
-        setIsInputFocused(true);
+        setIsInputFocused(!isInputFocused);
     }
 
     function handleInputBlur() {
@@ -90,6 +93,7 @@ const LandingPage = () => {
                 {/* User Profile Pic */}
                 <div className='h-[300px] flex justify-center'>
                     <div className='flex flex-col align-center w-[200px] ml-10 mt-10 mr-5'>
+                        <ThemePalete currentcolor={themeColor} handleThemeColor={handleThemeColor}/>
                         <img src={defaultUserPic} className='rounded-full size-36 p-4'/>
                     </div>
                      {artistName && <div className='absolute z-10'><Artist artist={artistName} setArtist={setArtistName} themeColor={themeColor}/></div>}
@@ -101,10 +105,10 @@ const LandingPage = () => {
                             <div className='relative bg-[#363636] rounded-full p-1 flex justify-between pr-[15px] pl-[15px] items-center w-[400px]'>
                                 
                                
-                                <input style={{ border: "none", outline: "none", backgroundColor: "transparent", fontSize: "14px" }} onFocus={handleInputFocus}
-                                     type='search' value={search} onChange={(event) => setSearch(event.target.value)} placeholder="procura um artista" />
+                                <input style={{ border: "none", outline: "none", backgroundColor: "transparent", fontSize: "14px" }} 
+                                     type='search' value={search} onChange={(event) => setSearch(event.target.value)} onClick={handleInputFocus} placeholder="procura um artista" />
                                 <div>
-                                    <IoSearch style={{ color: themeColor, fontSize: "17px" }} /></div>
+                                    <IoSearch style={{ color: themeColor, fontSize: "17px", cursor: "pointer" }} onClick={handleInputFocus} /></div>
                                 </div>
                                      {isInputFocused && (
                                          <ul className='absolute top-[90px]   bg-[#363636] rounded-md p-1 overflow-y-auto max-h-[140px] overflow-hidden mt-1 w-[395px] pl-4 pt-1' style={{ scrollbarWidth: "thin", scrollbarColor: "#202020 #101010" }}>
@@ -171,7 +175,7 @@ const LandingPage = () => {
 
                     {/* Logotipo */}                              
                     <div className='flex justify-center pr-10 pt-5' >
-                        <Logo style={{ width: "150px", color: themeColor }} />
+                        <Logo style={{ width: "150px", fill: themeColor }} />
                     </div>
                 </div>
                 <div style={{ backgroundColor: themeColor }} className='flex h-[300px] rounded-2xl items-center'>
@@ -182,7 +186,7 @@ const LandingPage = () => {
                         <Top3 artist={"Kendrick Lamar"} img={kendrickIMG} setArtistName={setArtistName}/>
                     </div>
                     
-                    <Top100 themeColor={themeColor}/>
+                    <Top100 themeColor={themeColor} setArtistName={setArtistName}/>
                 </div>
             </div>
         </div>
@@ -190,6 +194,30 @@ const LandingPage = () => {
 }
 
 export default LandingPage
+
+
+
+const ThemePalete = (props) => {
+    const [colorExpandido, setColorExpandido] = useState(false)
+    function handleColorExpandido(){
+        setColorExpandido(!colorExpandido)
+    }
+  return (
+    <div className='relative'>
+      <div className='rounded-full w-4 h-4' onClick={() => handleColorExpandido()} style={{ backgroundColor: props.currentcolor }}></div>
+        {colorExpandido && (
+            <div className='absolute rounded-md w-[150px] h-[70px] top-6 bg-black'>
+                <div className='flex flex-wrap gap-4 p-2 justify-center items-center '>
+                        {themeColors.map((color, index) => (
+                            <div key={index} onClick={() => (props.handleThemeColor(color), handleColorExpandido())} className='rounded-full w-4 h-4' style={{ backgroundColor: color }}></div>
+                        ))}
+                    </div>
+            </div>
+        )}
+    </div>
+  )
+}
+
 
 
 
