@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { motion } from "framer-motion"
 import { FaExpandAlt } from "react-icons/fa"
 import { FaCirclePlay } from "react-icons/fa6";
 import { HiArrowUpCircle } from "react-icons/hi2";
@@ -30,7 +31,7 @@ const Artist = (props) => {
     
 
     return (
-        <div>
+        <motion.div initial={{ opacity: 0}} animate={{ opacity: 1 }} exit={{ opacity: 0}} transition={{ ease: [0.67, 0.67, 0.83, 0.80] }}>
                 {/* <p>{props.artist} PROFILE:</p>
                 <p>Total reproduções: {totalReproducoes(dataArtist)}</p>
                 <p>Total de musicas: {totalDeMusicas(dataArtist)}</p>
@@ -105,7 +106,7 @@ const Artist = (props) => {
                     </div>
                 </div>
          
-        </div>
+        </motion.div>
     );
 }
 
@@ -128,31 +129,31 @@ export const Top1 = (props) => {
     return (
         <div>
             {expandido && (
-            <div className='h-[300px] w-[160px] bg-gradient-to-b flex flex-col gap-4 ' style={{ background: 'linear-gradient(to bottom, #111111 20%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0))' }}>
+            <motion.div initial={{ opacity: 0, translateY: -100}} animate={{ opacity: 1, translateY: 0 }} transition={{ ease: [0.17, 0.67, 0.83, 0.67] }} className='h-[300px] w-[160px] bg-gradient-to-b flex flex-col gap-4 ' style={{ background: 'linear-gradient(to bottom, #111111 20%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0))' }}>
                 <div>
-                <div className='relative flex justify-center'>
+                <motion.div initial={{ opacity: 0, translateY: 200}} animate={{ opacity: 1, translateY: 0 }} transition={{ ease: [0.17, 0.67, 0.83, 0.67] }} className='relative flex justify-center'>
                     <img src={props.img} className=' rounded-full size-32 p-4 mt-2'/>
                     {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
                     {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
-                    </div>
+                    </motion.div>
                 </div>
                 <div className='flex flex-col items-center justify-center gap-2 mt-3 text-xs'>
                     <p>{totalReproducoes(dataArtist)} plays</p>
-                    <BsGraphUpArrow  style={{ color: "black" , fontSize: "20px"}} />
+                    <BsGraphUpArrow  style={{ color: "black" , fontSize: "20px" }}/>
                     <p>{percentagemDoTotal(data1, dataArtist)}%</p>
-                    <BsThermometerSnow  style={{ color: "black" , fontSize: "20px"}}/>
+                    <BsThermometerSnow  style={{ color: "black" , fontSize: "20px"}} className='hover: text-white' />
                     <p>Mais ouvido no {estacaoDoAno(dataArtist)}</p>
             </div>
-            </div>)}
+            </motion.div>)}
             {!expandido && (
             <div className='h-[300px] w-[160px]  flex flex-col gap-4' >
                 <div>
-                <div className='relative flex justify-center'>
+                <motion.div initial={{ opacity: 0, translateY: -100}} animate={{ opacity: 1, translateY: 0 }} transition={{ ease: [0.17, 0.67, 0.83, 0.67] }} className='relative flex justify-center'>
                     <p onClick={() => props.setArtistName("TOOL")} className='absolute text-2xl top-12 cursor-pointer'>TOOL</p>
                     <img src={props.img} className=' rounded-full size-32 p-4 mt-[100px]'/>
                     {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
                     {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-[220px] cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
-                    </div>
+                    </motion.div>
                 </div>
             </div>)}
 
@@ -172,13 +173,13 @@ export const Top2 = (props) => {
     return (
         <div>
             {expandido && (
-            <div className='h-[300px] w-[160px] bg-gradient-to-b flex flex-col gap-4' style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.5) 10%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0))' }}>
+            <motion.div initial={{ opacity: 0, translateY: -100}} animate={{ opacity: 1, translateY: 0 }} transition={{ ease: [0.17, 0.67, 0.83, 0.67] }} className='h-[300px] w-[160px] bg-gradient-to-b flex flex-col gap-4' style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.5) 10%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0))' }}>
                 <div>
-                <div className='relative flex justify-center'>
+                <motion.div initial={{ opacity: 0, translateY: 200}} animate={{ opacity: 1, translateY: 0 }} transition={{ ease: [0.17, 0.67, 0.83, 0.67] }} className='relative flex justify-center'>
                     <img src={props.img} className=' rounded-full size-32 p-4 mt-2'/>
                     {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
                     {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
-                    </div>
+                    </motion.div>
                 </div>
                 <div className='flex flex-col items-center justify-center gap-2 mt-3 text-xs'>
                     <p>{totalReproducoes(dataArtist)} plays</p>
@@ -187,16 +188,16 @@ export const Top2 = (props) => {
                     <PiButterflyDuotone  style={{ color: "black" , fontSize: "20px"}}/>
                     <p>Mais ouvido no {estacaoDoAno(dataArtist)}</p>
             </div>
-            </div>)}
+            </motion.div>)}
             {!expandido && (
             <div className='h-[300px] w-[160px]  flex flex-col gap-4' >
                 <div>
-                <div className='relative flex justify-center'>
+                <motion.div initial={{ opacity: 0, translateY: -100}} animate={{ opacity: 1, translateY: 0 }} transition={{ ease: [0.17, 0.67, 0.83, 0.67] }} className='relative flex justify-center'>
                     <p onClick={() => props.setArtistName("System Of A Down")} className='absolute text-2xl top-8 text-center cursor-pointer'>System Of A Down</p>
                     <img src={props.img} className=' rounded-full size-32 p-4 mt-[100px] '/>
                     {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
                     {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-[220px] cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
-                    </div>
+                    </motion.div>
                 </div>
             </div>)}
 
@@ -217,13 +218,13 @@ export const Top2 = (props) => {
     return (
         <div>
             {expandido && (
-            <div className='h-[300px] w-[160px] bg-gradient-to-b flex flex-col gap-4' style={{ background: 'linear-gradient(to bottom, #111111 20%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0))' }}>
+            <motion.div initial={{ opacity: 0, translateY: -100}} animate={{ opacity: 1, translateY: 0 }} transition={{ ease: [0.17, 0.67, 0.83, 0.67] }} className='h-[300px] w-[160px] bg-gradient-to-b flex flex-col gap-4' style={{ background: 'linear-gradient(to bottom, #111111 20%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0))' }}>
                 <div>
-                <div className='relative flex justify-center'>
+                <motion.div initial={{ opacity: 0, translateY: 200}} animate={{ opacity: 1, translateY: 0 }} transition={{ ease: [0.17, 0.67, 0.83, 0.67] }} className='relative flex justify-center'>
                     <img src={props.img} className=' rounded-full size-32 p-4 mt-2'/>
                     {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
                     {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
-                    </div>
+                    </motion.div>
                 </div>
                 <div className='flex flex-col items-center justify-center gap-2 mt-3 text-xs'>
                     <p>{totalReproducoes(dataArtist)} plays</p>
@@ -232,16 +233,16 @@ export const Top2 = (props) => {
                     <BsThermometerSun  style={{ color: "black" , fontSize: "20px"}}/>
                     <p>Mais ouvido no {estacaoDoAno(dataArtist)}</p>
             </div>
-            </div>)}
+            </motion.div>)}
             {!expandido && (
             <div className='h-[300px] w-[160px]  flex flex-col gap-4' >
                 <div>
-                <div className='relative flex justify-center'>
+                <motion.div initial={{ opacity: 0, translateY: -100}} animate={{ opacity: 1, translateY: 0 }} transition={{ ease: [0.17, 0.67, 0.83, 0.67] }} className='relative flex justify-center'>
                     <p onClick={() => props.setArtistName("Kendrick Lamar")} className='absolute text-2xl top-8 text-center cursor-pointer'>Kendrick Lamar</p>
                     <img src={props.img} className=' rounded-full size-32 p-4 mt-[100px] '/>
                     {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
                     {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-[220px] cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
-                    </div>
+                    </motion.div>
                 </div>
             </div>)}
 

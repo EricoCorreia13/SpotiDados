@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from "framer-motion"
 import { IoFilter } from "react-icons/io5"
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaExpandAlt } from "react-icons/fa"

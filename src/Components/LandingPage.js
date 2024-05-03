@@ -204,12 +204,12 @@ const ThemePalete = (props) => {
     }
   return (
     <div className='relative'>
-      <div className='rounded-full w-4 h-4' onClick={() => handleColorExpandido()} style={{ backgroundColor: props.currentcolor }}></div>
+      <div className='rounded-full w-4 h-4 cursor-pointer' onClick={() => handleColorExpandido()} style={{ backgroundColor: props.currentcolor }}></div>
         {colorExpandido && (
             <div className='absolute rounded-md w-[150px] h-[70px] top-6 bg-black'>
                 <div className='flex flex-wrap gap-4 p-2 justify-center items-center '>
                         {themeColors.map((color, index) => (
-                            <div key={index} onClick={() => (props.handleThemeColor(color), handleColorExpandido())} className='rounded-full w-4 h-4' style={{ backgroundColor: color }}></div>
+                            <div key={index} onClick={() => (props.handleThemeColor(color), handleColorExpandido())} className='rounded-full w-4 h-4 cursor-pointer' style={{ backgroundColor: color }}></div>
                         ))}
                     </div>
             </div>
