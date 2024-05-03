@@ -592,3 +592,4 @@ function filterUltimoAno(data) {
         return itemDate >= oneYearAgo && itemDate <= currentDate;
     });
 }
+

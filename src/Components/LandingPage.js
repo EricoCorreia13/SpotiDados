@@ -8,9 +8,11 @@ import { TiWeatherWindyCloudy } from "react-icons/ti";
 import { PiButterflyDuotone } from "react-icons/pi";
 import { IoSearch } from "react-icons/io5";
 import { ReactComponent as Logo } from '../defaultImgs/spotidados-logoB4F.svg';
-
+import toolIMG from "../defaultImgs/Tool.jpg"
+import systemIMG from "../defaultImgs/SystemOfADown.jpg"
+import kendrickIMG from "../defaultImgs/kendrick-lamar.jpg"
 import Top100 from './Top100';
-import Artist from './Artist';
+import Artist, { Top1, Top2, Top3 } from './Artist';
 
 
 import default0 from "../defaultImgs/Default.jpg"
@@ -31,6 +33,8 @@ const LandingPage = () => {
     const [search, setSearch] = useState("")
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [artistName, setArtistName] = useState()
+
+    
     function handleInputFocus() {
         setIsInputFocused(true);
     }
@@ -171,7 +175,12 @@ const LandingPage = () => {
                     </div>
                 </div>
                 <div style={{ backgroundColor: themeColor }} className='flex h-[300px] rounded-2xl items-center'>
-                    <div className='w-[600px]'></div>
+                    <div className='w-[600px] flex gap-3 ml-3'>
+
+                        <Top1 artist={"TOOL"} img={toolIMG} setArtistName={setArtistName}/>
+                        <Top2 artist={"System Of A Down"} img={systemIMG} setArtistName={setArtistName}/>
+                        <Top3 artist={"Kendrick Lamar"} img={kendrickIMG} setArtistName={setArtistName}/>
+                    </div>
                     
                     <Top100 themeColor={themeColor}/>
                 </div>
@@ -278,4 +287,29 @@ function estacaoDoAno() {
         estacao = "Inverno";
     }
     return (estacao)
+}
+
+
+function top100Artistas() {
+    const artistPlayCount = {};
+
+
+    data1.forEach(item => {
+        const artist = item.master_metadata_album_artist_name;
+        if (artist in artistPlayCount) {
+            artistPlayCount[artist] += 1;
+        } else {
+            artistPlayCount[artist] = 1;
+        }
+    });
+
+
+    const artistPlayCountArray = Object.entries(artistPlayCount);
+
+
+    artistPlayCountArray.sort((a, b) => b[1] - a[1]);
+
+
+    const top100Artistas = artistPlayCountArray.slice(0, 100);
+    return top100Artistas;
 }

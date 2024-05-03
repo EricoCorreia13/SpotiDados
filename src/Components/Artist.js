@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaExpandAlt } from "react-icons/fa"
 import { FaCirclePlay } from "react-icons/fa6";
+import { HiArrowUpCircle } from "react-icons/hi2";
+import { BsThermometerSun, BsThermometerSnow } from "react-icons/bs";
+import { PiButterflyDuotone } from "react-icons/pi";
+import { BsGraphUpArrow } from "react-icons/bs";
 import data from "../spotify_data.history.json";
 import defaultUserPic from "../defaultImgs/Default2.jpg"
 import default0 from "../defaultImgs/Default.jpg"
@@ -9,6 +13,10 @@ import default2 from "../defaultImgs/Default2.jpg"
 import default3 from "../defaultImgs/Default3.jpg"
 import default4 from "../defaultImgs/Default4.jpg"
 import default5 from "../defaultImgs/Default5.jpg"
+import toolIMG from "../defaultImgs/Tool.jpg"
+import systemIMG from "../defaultImgs/SystemOfADown.jpg"
+import kendrickIMG from "../defaultImgs/kendrick-lamar.jpg"
+
 
 const data1 = data.filter((a) => a.master_metadata_track_name != null);
 
@@ -58,7 +66,12 @@ const Artist = (props) => {
                         <div className="flex flex-col items-end gap-[10px]">
                             <div className='flex flex-col align-center mt-8 mr-5'>
                                 <div className='relative'>
-                                    <img src={defaultUserPic} className=' rounded-full size-32 p-4'/>
+                                    {props.artist === "TOOL" ? (<img src={toolIMG} className=' rounded-full size-32 p-4'/>) : 
+                                    props.artist === "System Of A Down" ? (<img src={systemIMG} className=' rounded-full size-32 p-4'/>) :
+                                    props.artist === "Kendrick Lamar" ? (<img src={kendrickIMG} className=' rounded-full size-32 p-4'/>) :
+                                    (<img src={defaultUserPic} className=' rounded-full size-32 p-4'/>)
+                                    }
+
                                     <FaCirclePlay className='absolute left-20 top-20' style={{ color: props.themeColor , fontSize: "30px" }}/>
                                 </div>
                                 
@@ -97,6 +110,140 @@ const Artist = (props) => {
 }
 
 export default Artist
+
+export const Top1 = (props) => {
+
+    const [expandido, setExpandido] = useState(false)
+    const dataArtist = data1.filter(a => a.master_metadata_album_artist_name === props.artist)
+    function handleExpandido(){
+        setExpandido(!expandido)
+    }
+
+    return (
+        <div>
+            {expandido && (
+            <div className='h-[300px] w-[160px] bg-gradient-to-b flex flex-col gap-4' style={{ background: 'linear-gradient(to bottom, #111111 20%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0))' }}>
+                <div>
+                <div className='relative flex justify-center'>
+                    <img src={props.img} className=' rounded-full size-32 p-4 mt-2'/>
+                    {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
+                    {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
+                    </div>
+                </div>
+                <div className='flex flex-col items-center justify-center gap-2 mt-3 text-xs'>
+                    <p>{totalReproducoes(dataArtist)} plays</p>
+                    <BsGraphUpArrow  style={{ color: "black" , fontSize: "20px"}} />
+                    <p>{percentagemDoTotal(data1, dataArtist)}%</p>
+                    <BsThermometerSnow  style={{ color: "black" , fontSize: "20px"}}/>
+                    <p>Mais ouvido no {estacaoDoAno(dataArtist)}</p>
+            </div>
+            </div>)}
+            {!expandido && (
+            <div className='h-[300px] w-[160px]  flex flex-col gap-4' >
+                <div>
+                <div className='relative flex justify-center'>
+                    <p onClick={() => props.setArtistName("TOOL")} className='absolute text-2xl top-12 cursor-pointer'>TOOL</p>
+                    <img src={props.img} className=' rounded-full size-32 p-4 mt-[100px]'/>
+                    {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
+                    {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-[220px] cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
+                    </div>
+                </div>
+            </div>)}
+
+            
+        </div>
+    )
+  };
+
+export const Top2 = (props) => {
+
+    const [expandido, setExpandido] = useState(false)
+    const dataArtist = data1.filter(a => a.master_metadata_album_artist_name === props.artist)
+    function handleExpandido(){
+        setExpandido(!expandido)
+    }
+
+    return (
+        <div>
+            {expandido && (
+            <div className='h-[300px] w-[160px] bg-gradient-to-b flex flex-col gap-4' style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.5) 10%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0))' }}>
+                <div>
+                <div className='relative flex justify-center'>
+                    <img src={props.img} className=' rounded-full size-32 p-4 mt-2'/>
+                    {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
+                    {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
+                    </div>
+                </div>
+                <div className='flex flex-col items-center justify-center gap-2 mt-3 text-xs'>
+                    <p>{totalReproducoes(dataArtist)} plays</p>
+                    <BsGraphUpArrow  style={{ color: "black" , fontSize: "20px"}} />
+                    <p>{percentagemDoTotal(data1, dataArtist)}%</p>
+                    <PiButterflyDuotone  style={{ color: "black" , fontSize: "20px"}}/>
+                    <p>Mais ouvido no {estacaoDoAno(dataArtist)}</p>
+            </div>
+            </div>)}
+            {!expandido && (
+            <div className='h-[300px] w-[160px]  flex flex-col gap-4' >
+                <div>
+                <div className='relative flex justify-center'>
+                    <p onClick={() => props.setArtistName("System Of A Down")} className='absolute text-2xl top-8 text-center cursor-pointer'>System Of A Down</p>
+                    <img src={props.img} className=' rounded-full size-32 p-4 mt-[100px] '/>
+                    {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
+                    {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-[220px] cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
+                    </div>
+                </div>
+            </div>)}
+
+            
+        </div>
+    )
+  };
+
+
+  export const Top3 = (props) => {
+
+    const [expandido, setExpandido] = useState(false)
+    const dataArtist = data1.filter(a => a.master_metadata_album_artist_name === props.artist)
+    function handleExpandido(){
+        setExpandido(!expandido)
+    }
+
+    return (
+        <div>
+            {expandido && (
+            <div className='h-[300px] w-[160px] bg-gradient-to-b flex flex-col gap-4' style={{ background: 'linear-gradient(to bottom, #111111 20%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0))' }}>
+                <div>
+                <div className='relative flex justify-center'>
+                    <img src={props.img} className=' rounded-full size-32 p-4 mt-2'/>
+                    {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
+                    {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
+                    </div>
+                </div>
+                <div className='flex flex-col items-center justify-center gap-2 mt-3 text-xs'>
+                    <p>{totalReproducoes(dataArtist)} plays</p>
+                    <BsGraphUpArrow  style={{ color: "black" , fontSize: "20px"}} />
+                    <p>{percentagemDoTotal(data1, dataArtist)}%</p>
+                    <BsThermometerSun  style={{ color: "black" , fontSize: "20px"}}/>
+                    <p>Mais ouvido no {estacaoDoAno(dataArtist)}</p>
+            </div>
+            </div>)}
+            {!expandido && (
+            <div className='h-[300px] w-[160px]  flex flex-col gap-4' >
+                <div>
+                <div className='relative flex justify-center'>
+                    <p onClick={() => props.setArtistName("Kendrick Lamar")} className='absolute text-2xl top-8 text-center cursor-pointer'>Kendrick Lamar</p>
+                    <img src={props.img} className=' rounded-full size-32 p-4 mt-[100px] '/>
+                    {expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-32 cursor-pointer' style={{ transform: "rotate(180deg)", color: "black" , fontSize: "30px"}}/>)}
+                    {!expandido && (<HiArrowUpCircle onClick={() => handleExpandido()} className='absolute top-[220px] cursor-pointer' style={{ color: "black" , fontSize: "30px"}}/>)}
+                    </div>
+                </div>
+            </div>)}
+
+            
+        </div>
+    )
+  };
+
 
 
 function estacaoDoAno(data) {
