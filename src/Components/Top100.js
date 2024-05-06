@@ -280,7 +280,7 @@ const Top100 = (props) => {
                                         <img className="rounded-sm size-5 ml-6 mt-2" src={imgsArray[Math.floor(Math.random() * imgsArray.length)]} alt={a.album} />
                                         <div className='flex gap-10 items-center'>
                                             
-                                            <p className='text-s text-left text-white w-[150px] mt-3'>on {a.album}</p>
+                                            <p className='text-s text-left text-white w-[150px] mt-3'>{a.album}</p>
                                             <p className='text-s text-left text-white w-[150px] mt-3'>by {a.artist}</p>
                                             
                                         </div>
