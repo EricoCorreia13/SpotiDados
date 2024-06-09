@@ -17,7 +17,7 @@ import default5 from "../defaultImgs/Default5.jpg"
 import toolIMG from "../defaultImgs/Tool.jpg"
 import systemIMG from "../defaultImgs/SystemOfADown.jpg"
 import kendrickIMG from "../defaultImgs/kendrick-lamar.jpg"
-
+//
 
 const data1 = data.filter((a) => a.master_metadata_track_name != null);
 
